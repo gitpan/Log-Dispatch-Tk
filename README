@@ -8,8 +8,8 @@ This widget provide:
 Suggested DSLI line in the Ptk module list:
 
 Log::Dispatch
-  ToTk    bdpO  Interface class between Log::Dispatch and Tk   DDUMONT
-  TkText  bdpO  text widget to log Log::Dispatch messages      DDUMONT
+  ToTk    RdpO  Interface class between Log::Dispatch and Tk   DDUMONT
+  TkText  RdpO  text widget to log Log::Dispatch messages      DDUMONT
 
 See the embedded documentation in the module for more details.
 

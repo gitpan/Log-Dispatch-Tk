@@ -8,7 +8,7 @@ use Tk::ROText ;
 use Log::Dispatch::ToTk;
 use base qw(Tk::Derived Tk::ROText);
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/;
 
 Tk::Widget->Construct('LogText');
 
@@ -85,7 +85,7 @@ sub FilterMenuItems
      return \@buttons ;
    }
 
-sub log_message
+sub log
   {
      my ($dw,%params) = @_;
      

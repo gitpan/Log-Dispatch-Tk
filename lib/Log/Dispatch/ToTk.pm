@@ -6,7 +6,7 @@ use vars qw($VERSION);
 use base qw(Log::Dispatch::Output);
 use fields qw/widget/ ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/;
 
 sub new
   {
@@ -28,7 +28,7 @@ sub new
     return $self ;
   }
 
-sub log_message
+sub log
   {
     my Log::Dispatch::ToTk $self = shift;
     my %params = @_;
@@ -36,7 +36,7 @@ sub log_message
     chomp $params{message};
     my $nb = $self->_level_as_number($params{level}) ;
     $params{level} = $self->{level_names}[$nb] ;
-    $self->{widget}->log_message(%params);
+    $self->{widget}->log(%params);
 }
 
 sub all_levels
