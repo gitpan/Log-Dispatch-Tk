@@ -1,4 +1,4 @@
-Changes
+ChangeLog
 MANIFEST
 Makefile.PL
 README
@@ -6,3 +6,4 @@ TkText.pm
 ToTk.pm
 t/tktext.t
 t/some_level.t
+META.yml                                 Module meta-data (added by MakeMaker)

@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile
   (
    'NAME'	=> 'Log-Dispatch-Tk',
-   'VERSION' => '1.6',
+   'VERSION' => '1.7',
    'dist' => {COMPRESS=>'gzip -9f', SUFFIX => 'gz'},
    PM =>
    {
@@ -19,5 +19,5 @@ WriteMakefile
    },
    ($] >= 5.005 ?
     (ABSTRACT   => 'Tk i/f class and Text widget for Log::Dispatch messages',
-     AUTHOR     => 'Dominique Dumont (domi@barrayar.grenoble.hp.com)') : ())
+     AUTHOR     => 'Dominique Dumont (ddumont@cpan.org)') : ())
   );

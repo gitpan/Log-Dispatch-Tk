@@ -6,7 +6,7 @@ use vars qw($VERSION);
 use base qw(Log::Dispatch::Output);
 use fields qw/widget/ ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.6 $ =~ /(\d+)\.(\d+)/;
 
 sub new
   {
@@ -16,7 +16,11 @@ sub new
 
     my $self = bless {} , $class;
 
-    $self->{widget} = delete $params{widget} ;
+    $self->{widget} = delete $params{-widget} || delete $params{widget} ;
+
+    # remove leading '-' (Tk style)
+    map { my $k = $_ ; s/^-//; $params{$_} = delete $params{$k} }
+      grep /^-/,keys %params ;
 
     $self->_basic_init(%params);
     return $self ;
@@ -26,6 +30,10 @@ sub log
   {
     my $self = shift;
     my %params = @_;
+
+    map {my $k = $_ ; s/^-//; $params{$_} = delete $params{$k}}
+      grep /^-/,keys %params ;
+
     return unless $self->_should_log($params{level});
     
     chomp $params{message};
@@ -87,11 +95,14 @@ __END__
 
 =head1 DESCRIPTION
 
+Most users will only need to use L<Log::Dispatch::TkText> widget to
+have Log::Dispatch messages written on a text widget. 
+
+For more fancy uses, this module can be used by a composite widget
+dedicated to handle Log::Dispatch logs.
+
 This module is the interface class between L<Log::Dispatch> and Tk
 widgets.  This class is derived from L<Log::Dispatch::Output>.
-
-This class must be used only by a composite widget dedicated to handle
-Log::Dispatch logs.
 
 One ToTk object will be created for each Log::Dispatch::Tk* widget and
 the user must register the ToTk object to the log dispatcher.
@@ -134,10 +145,10 @@ minimum level.
 
 =head1 AUTHOR
 
-Dominique Dumont <Dominique_Dumont@hp.com> using L<Log::Dispatch> and
+Dominique Dumont <Dominique.Dumont@hp.com> using L<Log::Dispatch> and
 L<Log::Dispatch::Output> from Dave Rolsky, autarch@urth.org
 
-Copyright (c) 2000, 2002 Hewlett-Packard Company. All rights reserved.
+Copyright (c) 2000, 2003 Hewlett-Packard Company. All rights reserved.
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 

@@ -8,21 +8,23 @@ use Tk::ROText ;
 use Log::Dispatch::ToTk;
 use base qw(Tk::Derived Tk::ROText);
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.6 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.7 $ =~ /(\d+)\.(\d+)/;
 
 Tk::Widget->Construct('LogText');
 
 sub InitObject
   {
     my ($dw,$args) = @_ ;
-    
+
     my %params ;
     foreach my $key (qw/name min_level max_level/)
       {
-        $params{$key} = delete $args->{$key} if defined $args->{$key};
-      } 
-    
-    $dw->{logger} = Log::Dispatch::ToTk->new(%params, widget => $dw) ;
+        $params{$key} = delete $args->{$key} if defined $args->{$key} ;
+        $params{$key} = delete $args->{'-'.$key} if defined $args->{'-'.$key} ;
+      }
+
+    # 
+    $dw->{logger} = Log::Dispatch::ToTk->new(%params, -widget => $dw) ;
 
     $dw->tagConfigure('label', 
                       -underline => 1,
@@ -48,6 +50,9 @@ sub logger
     return $dw->{logger} ;
   }
 
+# Check "The perl/Tk widget extended mdethods" section in 
+# "mastering Perl/Tk" for (some) explanations on Text menus
+
 sub MenuLabels
   {
     my $dw = shift;
@@ -59,29 +64,28 @@ sub FilterMenuItems
      my ($dw) = @_;
 
      my @buttons ;
-     
+
      #print "Tags are ",$dw->tagNames,"\n";
-           
+
      foreach my $level ($dw->{logger}->accepted_levels())
        {
          # find if the tag exists or not
          my @ranges = $dw->tagRanges($level);
-         my $value = scalar @ranges ? $dw->tagCget($level => '-state') 
-           || 'normal' : 'normal';
+         my $value = scalar @ranges ? $dw->tagCget($level => '-elide') : 0;
 
          #print "Adding level $level in menu\n";
          my $cb = sub 
            {
              #print "value $level is $value\n";
-             $dw->tagConfigure($level, -state => $value) ;
+             $dw->tagConfigure($level, -elide => $value) ;
            };
 
          push @buttons,  
          [
           checkbutton => $level eq 'err' ? 'e~rr' : '~'.$level, 
           -variable => \$value,
-          -onvalue => 'normal',
-          -offvalue => 'hidden',
+          -onvalue =>  0, # want button set when level is not hidden
+          -offvalue => 1, # hence the inversion
           -command => $cb
          ] ;
        } ;
