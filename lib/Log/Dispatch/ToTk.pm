@@ -6,7 +6,7 @@ use vars qw($VERSION);
 use base qw(Log::Dispatch::Output);
 use fields qw/widget/ ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.1 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/;
 
 sub new
   {
@@ -28,16 +28,15 @@ sub new
     return $self ;
   }
 
-sub log
+sub log_message
   {
     my Log::Dispatch::ToTk $self = shift;
     my %params = @_;
     
-    return unless $self->_should_log($params{level});
     chomp $params{message};
     my $nb = $self->_level_as_number($params{level}) ;
     $params{level} = $self->{level_names}[$nb] ;
-    $self->{widget}->log(%params);
+    $self->{widget}->log_message(%params);
 }
 
 sub all_levels
@@ -133,15 +132,15 @@ means functionally that the object has no maximum).
 
 =back
 
-=head2 log( level => $, message => $ )
+=head2 log_message( level => $, message => $ )
 
 Sends a message if the level is greater than or equal to the object's
-minimum level.  This method must be overridden in the subclass.
+minimum level.
 
 =head1 AUTHOR
 
 Dominique Dumont <Dominique_Dumont@hp.com> using L<Log::Dispatch> and
-L<Log::Dispatch::Output> from Dave Rolsky, <autarch@urth.org>
+L<Log::Dispatch::Output> from Dave Rolsky, autarch@urth.org
 
 Copyright (c) 2000 Dominique Dumont. All rights reserved.  This
 program is free software; you can redistribute it and/or modify it

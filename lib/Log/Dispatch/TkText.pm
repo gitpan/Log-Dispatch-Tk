@@ -8,7 +8,7 @@ use Tk::ROText ;
 use Log::Dispatch::ToTk;
 use base qw(Tk::Derived Tk::ROText);
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.1 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/;
 
 Tk::Widget->Construct('LogText');
 
@@ -85,7 +85,7 @@ sub FilterMenuItems
      return \@buttons ;
    }
 
-sub log
+sub log_message
   {
      my ($dw,%params) = @_;
      
@@ -155,7 +155,7 @@ The following methods were added to the L<Tk::ROText> widget:
 
 Returns the buddy ToTk object.
 
-=head2 log( level => $, message => $ )
+=head2 log_message( level => $, message => $ )
 
 Sends a message if the level is greater than or equal to the object's
 minimum level.
