@@ -6,7 +6,7 @@ use vars qw($VERSION);
 use base qw(Log::Dispatch::Output);
 use fields qw/widget/ ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.4 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/;
 
 sub new
   {
@@ -26,6 +26,7 @@ sub log
   {
     my $self = shift;
     my %params = @_;
+    return unless $self->_should_log($params{level});
     
     chomp $params{message};
     my $nb = $self->_level_as_number($params{level}) ;

@@ -26,7 +26,7 @@ ok($dispatch) ;
 my $mw = MainWindow-> new ;
 
 my $tklog = $mw->Scrolled('LogText', name => 'tk',
-                          min_level => 'debug');
+                          min_level => 'info');
 $tklog -> pack ;
 
 ok($tklog) ;
@@ -49,6 +49,12 @@ $dispatch -> log
   (
    level => 3,
    message => "message using numeric levels (level 3 in this case)"
+   );
+
+$dispatch -> log 
+  (
+   level => 'debug',
+   message => "This message should not be displayed"
    );
 
 
