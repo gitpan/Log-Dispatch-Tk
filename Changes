@@ -1,0 +1,5 @@
+2002-04-11  Dominique Dumont  <domi@komarr.grenoble.hp.com>
+
+	* ToTk.pm (v1.5): Changed pseudo-hash to regular hashes.
+
+

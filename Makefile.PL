@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile
   (
    'NAME'	=> 'Log-Dispatch-Tk',
-   'VERSION' => '1.4',
+   'VERSION' => '1.5',
    'dist' => {COMPRESS=>'gzip -9f', SUFFIX => 'gz'},
    PM =>
    {
@@ -14,7 +14,7 @@ WriteMakefile
    'PREREQ_PM' =>
    {
     'Tk' => 0,
-    'Log::Dispatch' => '1.11',
+    'Log::Dispatch' => '2.00',
     'Log::Dispatch::Output' => '1.011'
    },
    ($] >= 5.005 ?

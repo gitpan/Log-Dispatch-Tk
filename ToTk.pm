@@ -6,31 +6,25 @@ use vars qw($VERSION);
 use base qw(Log::Dispatch::Output);
 use fields qw/widget/ ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.4 $ =~ /(\d+)\.(\d+)/;
 
 sub new
   {
     my $proto = shift;
     my $class = ref $proto || $proto;
-
     my %params = @_;
 
-    my $self;
-    {
-      no strict 'refs';
-      $self = bless [ \%{"${class}::FIELDS"} ], $class;
-    }
+    my $self = bless {} , $class;
 
     $self->{widget} = delete $params{widget} ;
 
     $self->_basic_init(%params);
-    # Do more if you like
     return $self ;
   }
 
 sub log
   {
-    my Log::Dispatch::ToTk $self = shift;
+    my $self = shift;
     my %params = @_;
     
     chomp $params{message};
@@ -41,7 +35,7 @@ sub log
 
 sub all_levels
   {
-    my Log::Dispatch::ToTk $self = shift;
+    my $self = shift;
     #print "From level $self->{min_level} to $self->{max_level}\n";
    
     return @{$self->{level_names}}[$self->{min_level} .. $self->{max_level}] ;
@@ -142,9 +136,9 @@ minimum level.
 Dominique Dumont <Dominique_Dumont@hp.com> using L<Log::Dispatch> and
 L<Log::Dispatch::Output> from Dave Rolsky, autarch@urth.org
 
-Copyright (c) 2000 Dominique Dumont. All rights reserved.  This
-program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+Copyright (c) 2000, 2002 Hewlett-Packard Company. All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
