@@ -1,0 +1,6 @@
+MANIFEST
+Makefile.PL
+README
+lib/Log/Dispatch/TkText.pm
+lib/Log/Dispatch/ToTk.pm
+t/tktext.t

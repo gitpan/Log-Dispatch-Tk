@@ -1,0 +1,41 @@
+
+This widget provide: 
+- a read-only text widget (based on Tk::ROText) for logging through
+  the Log::Dispatch module.
+- a Tk interface class to handle logs between Log::Dispatch and the Tk
+  widget dedicated to log message from Log::Dispatch.
+
+Suggested DSLI line in the Ptk module list:
+
+Log::Dispatch
+  ToTk    bdpO  Interface class between Log::Dispatch and Tk   DDUMONT
+  TkText  bdpO  text widget to log Log::Dispatch messages      DDUMONT
+
+See the embedded documentation in the module for more details.
+
+Comments and suggestions are always welcome.
+
+Legal mumbo jumbo:
+
+ Copyright (c) 2000 Dominique Dumont. All rights reserved.
+ This program is free software; you can redistribute it and/or
+ modify it under the same terms as Perl itself.
+
+ - Dominique Dumont
+   dominique_dumont@grenoble.hp.com
+
+---------------------------------------------------------------------
+INSTALLATION
+
+   	 gunzip -c <dist_file>.tar.gz | tar xvf -
+   	 cd <dist_directory>
+   	 perl Makefile.PL
+   	 make test          
+   	 make install
+
+
+
+
+
+
+
