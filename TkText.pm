@@ -8,7 +8,7 @@ use Tk::ROText ;
 use Log::Dispatch::ToTk;
 use base qw(Tk::Derived Tk::ROText);
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "%d.%03d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/;
 
 Tk::Widget->Construct('LogText');
 
@@ -64,7 +64,11 @@ sub FilterMenuItems
            
      foreach my $level ($dw->{logger}->accepted_levels())
        {
-         my $value = $dw->tagCget($level => '-state') || 'normal';
+         # find if the tag exists or not
+         my @ranges = $dw->tagRanges($level);
+         my $value = scalar @ranges ? $dw->tagCget($level => '-state') 
+           || 'normal' : 'normal';
+
          #print "Adding level $level in menu\n";
          my $cb = sub 
            {
@@ -165,7 +169,7 @@ minimum level.
 Dominique Dumont <Dominique_Dumont@hp.com> using L<Log::Dispatch> from
 Dave Rolsky, <autarch@urth.org>
 
-Copyright (c) 2000 Dominique Dumont. All rights reserved.  This
+Copyright (c) 2000-2001 Dominique Dumont. All rights reserved.  This
 program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 

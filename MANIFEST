@@ -1,6 +1,7 @@
 MANIFEST
 Makefile.PL
 README
-lib/Log/Dispatch/TkText.pm
-lib/Log/Dispatch/ToTk.pm
+TkText.pm
+ToTk.pm
 t/tktext.t
+t/some_level.t
